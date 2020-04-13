@@ -1,23 +1,19 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
   #ログインしていなければトップページへ戻る
-  before_action :correct_user, only: [:destroy, :update]
+  before_action :correct_user, only: [:destroy, :update, :show, :edit]
   #ログイン中のユーザーの自分のタスク以外ならトップページ戻る
   
   def index
     if logged_in?
-      #@tasks = current_user.tasks.order(id: :desc).page(params[:page])
-      @tasks = Task.order(id: :desc).page(params[:page])
+      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
     end
   end
   #ログインしていれば、@tasksインスタンスを生成
   
   def show
-    #current_user = User.find_by(id: session[:user_id]) いらない
     @task = Task.find(params[:id])
   end
-  #current_user＝ログイン中のユーザ
-  #@task＝task全件の中から選択したtask
   
   def new
     @task = current_user.tasks.build
