@@ -1,15 +1,16 @@
-<h1>
+<h4>
   id:<%= @task.id %>のタスク詳細ページ
-</h1>
-
+</h4>
 <p>
-  進行状況:<%= @task.status %>
+  進行状況 : <%= @task.status %>
 </p>
-
 <p>
-  タスク詳細：<%= @task.content %>
+  タスク詳細 : <%= @task.content %>
 </p>
-
-<%= link_to '一覧に戻る', tasks_path %>
-<%= link_to 'このタスクを編集する', edit_task_path(@task) %>
-<%= link_to 'このタスクを削除する', @task, method: :delete, data: {confirm: '本当に削除してもよろしいですか？'} %>
+<div class="row">
+<%= link_to 'タスク一覧に戻る', tasks_path, class: 'btn btn-info mr-2' %>
+<% if current_user.id == @task.user_id %>
+  <%= link_to 'このタスクを編集する', edit_task_path(@task), class: 'btn btn-info mr-2' %>
+  <%= link_to 'このタスクを削除する', @task, method: :delete, data: {confirm: '本当に削除してもよろしいですか？'}, class: 'btn btn-info' %>
+<% end %>
+</div>

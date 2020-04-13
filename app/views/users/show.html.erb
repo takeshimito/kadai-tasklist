@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="card col-sm-8">
+    <div class="card-header">
+      <h3 class="card-title"><%= @user.name %></h3>
+    </div>
+    <div class="card-body">
+      <img class="rounded img-fluid" src="/assets/image.png" alt="プロフィール画像">
+    </div>
+    <div class="card-body">
+      <%= render 'tasks/tasks', tasks: @tasks%>
+    </div>
+  </div>  
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <%= link_to 'ユーザ一覧', users_path , class: 'btn btn-info' %>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to 'タスク一覧', tasks_path , class: 'btn btn-info' %>
+  </div>
+  <% if current_user == @user  %>
+  <div class="col-sm-4">
+    <%= link_to '新規タスクの投稿', new_task_path, class: 'btn btn-info' %>
+  </div>
+  <% end %>
+ </div>
