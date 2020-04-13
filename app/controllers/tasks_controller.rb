@@ -5,14 +5,11 @@ class TasksController < ApplicationController
   #ログイン中のユーザーの自分のタスク以外ならトップページ戻る
   
   def index
-    if logged_in?
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
-    end
+    @tasks = current_user.tasks.order(id: :desc).page(params[:page])
   end
   #ログインしていれば、@tasksインスタンスを生成
   
   def show
-    @task = Task.find(params[:id])
   end
   
   def new
@@ -34,7 +31,6 @@ class TasksController < ApplicationController
   end
   
   def edit
-    @task = Task.find(params[:id])
   end
   #取り扱い中のタスクのインスタンス　updateにcorrect_userを適応しているからOK
   
@@ -60,7 +56,7 @@ class TasksController < ApplicationController
   
   def correct_user
     #@task = current_user.tasks.find_by(id: params[:id])
-    @task = current_user.tasks.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
     unless @task
       redirect_to root_path
     end
